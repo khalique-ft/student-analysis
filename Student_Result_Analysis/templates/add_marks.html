@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Add Marks - Student Result Analysis{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Add Marks</h2>
+
+    {% if students %}
+    <form method="POST" action="{{ url_for('add_marks') }}">
+        <div class="form-group">
+            <label for="student_id">Select Student *</label>
+            <select id="student_id" name="student_id" required>
+                <option value="">-- Choose Student --</option>
+                {% for student in students %}
+                    <option value="{{ student.student_id }}">
+                        {{ student.name }} ({{ student.roll_no }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <h3 style="margin: 1.5rem 0 1rem; color: #1e3c72;">Enter Marks (0 - 100)</h3>
+
+        <div class="marks-grid">
+            <div class="form-group">
+                <label for="Mathematics">Mathematics</label>
+                <input type="number" id="Mathematics" name="Mathematics" min="0" max="100" placeholder="0-100">
+            </div>
+            <div class="form-group">
+                <label for="Science">Science</label>
+                <input type="number" id="Science" name="Science" min="0" max="100" placeholder="0-100">
+            </div>
+            <div class="form-group">
+                <label for="English">English</label>
+                <input type="number" id="English" name="English" min="0" max="100" placeholder="0-100">
+            </div>
+            <div class="form-group">
+                <label for="History">History</label>
+                <input type="number" id="History" name="History" min="0" max="100" placeholder="0-100">
+            </div>
+            <div class="form-group">
+                <label for="Computer">Computer</label>
+                <input type="number" id="Computer" name="Computer" min="0" max="100" placeholder="0-100">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success" style="margin-top: 1rem;">Save Marks</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+    {% else %}
+        <p>No students found. Please <a href="{{ url_for('add_student') }}">add a student</a> first.</p>
+    {% endif %}
+</div>
+{% endblock %}

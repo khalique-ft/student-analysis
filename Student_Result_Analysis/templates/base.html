@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Result Analysis{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">📊 Student Result Analysis</div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}" class="{% if request.endpoint == 'index' %}active{% endif %}">Dashboard</a></li>
+            <li><a href="{{ url_for('add_student') }}" class="{% if request.endpoint == 'add_student' %}active{% endif %}">Add Student</a></li>
+            <li><a href="{{ url_for('add_marks') }}" class="{% if request.endpoint == 'add_marks' %}active{% endif %}">Add Marks</a></li>
+            <li><a href="{{ url_for('view_results') }}" class="{% if request.endpoint == 'view_results' %}active{% endif %}">View Results</a></li>
+            <li><a href="{{ url_for('analysis') }}" class="{% if request.endpoint == 'analysis' %}active{% endif %}">Analysis</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+    </div>
+
+    <footer>
+        &copy; 2025 Student Result Analysis System | Beginner Project
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

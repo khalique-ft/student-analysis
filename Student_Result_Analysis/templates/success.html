@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Success - Student Result Analysis{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align: center; padding: 3rem;">
+    <h2 style="color: #10b981;">✅ Success!</h2>
+    <p style="font-size: 1.2rem; margin: 1.5rem 0;">
+        {{ message or "Operation completed successfully." }}
+    </p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Go to Dashboard</a>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis - Student Result Analysis{% endblock %}
+
+{% block content %}
+
+{% if topper %}
+<div class="analysis-grid">
+    <!-- Topper Card -->
+    <div class="card topper-card">
+        <h2>🏆 Class Topper</h2>
+        <p><strong>Name:</strong> {{ topper.name }}</p>
+        <p><strong>Roll No:</strong> {{ topper.roll_no }}</p>
+        <p><strong>Class:</strong> {{ topper.class or '-' }}</p>
+        <p><strong>Average:</strong> {{ topper.average }}%</p>
+    </div>
+
+    <!-- Pass Percentage Card -->
+    <div class="card pass-card">
+        <h2>✅ Overall Pass Percentage</h2>
+        <div class="number" style="font-size: 2.8rem; font-weight: 700; color: #065f46;">
+            {{ pass_percentage }}%
+        </div>
+        <p>Students with average ≥ 40 are considered passed.</p>
+    </div>
+</div>
+
+<!-- Subject-wise Averages -->
+<div class="card">
+    <h2>Subject-wise Average Marks</h2>
+    <ul style="list-style: none; padding-left: 0;">
+        {% for subject, avg in subject_avg.items() %}
+            <li style="padding: 0.4rem 0; border-bottom: 1px solid #eee;">
+                <strong>{{ subject }}:</strong> {{ avg }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Graph -->
+{% if graph_exists %}
+<div class="card graph-container">
+    <h2>Subject-wise Performance Graph</h2>
+    <img src="{{ url_for('static', filename='images/subject_avg.png') }}" alt="Subject Average Graph">
+</div>
+{% endif %}
+
+{% else %}
+<div class="card">
+    <h2>Analysis</h2>
+    <p>No data available for analysis. Please add students and marks first.</p>
+</div>
+{% endif %}
+
+{% endblock %}

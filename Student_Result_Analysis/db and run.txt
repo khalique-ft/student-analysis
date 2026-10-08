@@ -1,0 +1,33 @@
+pip install -r requirements.txt
+
+python app.py
+
+-- database/schema.sql
+-- Student Result Analysis System - Database Schema
+
+-- Create Database
+CREATE DATABASE IF NOT EXISTS student_result_db;
+USE student_result_db;
+
+-- Students Table
+CREATE TABLE IF NOT EXISTS students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    roll_no VARCHAR(20) UNIQUE NOT NULL,
+    class VARCHAR(50),
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Marks Table
+CREATE TABLE IF NOT EXISTS marks (
+    mark_id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    subject VARCHAR(50) NOT NULL,
+    marks INT NOT NULL CHECK (marks BETWEEN 0 AND 100),
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
+);
+
+-- Optional: Index for faster queries
+CREATE INDEX idx_student_id ON marks(student_id);
+CREATE INDEX idx_subject ON marks(subject);

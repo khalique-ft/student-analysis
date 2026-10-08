@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Student Result Analysis{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Dashboard</h2>
+    <p>Welcome to the Student Result Analysis System.</p>
+</div>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="number">{{ total_students }}</div>
+        <div class="label">Total Students</div>
+    </div>
+    <div class="stat-card">
+        <div class="number">{{ pass_percentage }}%</div>
+        <div class="label">Overall Pass Percentage</div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Quick Actions</h2>
+    <a href="{{ url_for('add_student') }}" class="btn btn-primary">➕ Add Student</a>
+    &nbsp;
+    <a href="{{ url_for('add_marks') }}" class="btn btn-success">📝 Add Marks</a>
+    &nbsp;
+    <a href="{{ url_for('view_results') }}" class="btn btn-secondary">📋 View Results</a>
+    &nbsp;
+    <a href="{{ url_for('analysis') }}" class="btn btn-primary">📈 View Analysis</a>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}View Results - Student Result Analysis{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Student Results</h2>
+
+    {% if results %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Roll No</th>
+                    <th>Class</th>
+                    <th>Subjects & Marks</th>
+                    <th>Total</th>
+                    <th>Average</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in results %}
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.roll_no }}</td>
+                    <td>{{ r.class or '-' }}</td>
+                    <td>{{ r.subjects }}</td>
+                    <td>{{ r.total }}</td>
+                    <td>{{ r.average }}</td>
+                    <td>
+                        <span class="grade grade-{{ r.grade }}">{{ r.grade }}</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No results available. Please add students and marks first.</p>
+    {% endif %}
+</div>
+{% endblock %}
